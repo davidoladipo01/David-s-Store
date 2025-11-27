@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Store</title>
+    <link rel="stylesheet" href="product.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+
+</head>
+
+<body class="bg-light">
+
+    <!-- HEADER -->
+    <div class="container mt-4">
+        <div class="store-header">David Store</div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container mt-4 p-4 bg-white rounded-4 shadow">
+
+        <!-- INPUTS ROW -->
+        <div class="p-3 d-flex gap-2">
+            <input class="form-control w-25" type="text" id="prodName" placeholder="Product Name">
+            <input class="form-control w-25" type="text" id="prodPrice" placeholder="Product Price">
+            <input class="form-control w-25" type="text" id="prodDesc" placeholder="Product Description">
+            <input class="form-control w-25" type="text" id="prodImg" placeholder="Product Image">
+            <button class="btn btn-success" onclick="submitProduct()">Submit</button>
+        </div>
+
+        <!-- ACTION BUTTONS ROW -->
+        <div class="p-3 d-flex gap-2 justify-content-evenly">
+            <button class="btn btn-danger" onclick="deleteLastProd()">Delete</button>
+            <button class="btn btn-secondary" onclick="addAsFirst()">Add as first</button>
+            <button class="btn btn-dark" onclick="deleteFirst()">Delete first</button>
+            <button class="btn btn-primary" onclick="reverseSelection()">Reverse selection</button>
+        </div>
+
+        <!-- PRODUCT DISPLAY GRID -->
+        <div class="ms-3 mt-4" id="result"></div>
+
+    </div>
+
+
+    <script>
+        let prodArr = []
+
+        function submitProduct() {
+            let productName = prodName.value
+            let productPrice = prodPrice.value
+            let productDescription = prodDesc.value
+            let productImage = prodImg.value
+
+            let prodobj = {
+                productName,
+                productDescription,
+                productPrice,
+                productImage,
+            }
+
+            prodArr.push(prodobj)
+
+            console.log(productName)
+            console.log(prodArr)
+            prodName.value = '';
+            prodDesc.value = '';
+            prodImg.value = '';
+            prodPrice.value = '';
+
+            displayProd();
+
+        }
+
+
+        function displayProd() {
+            result.innerHTML = ''
+            for (let i = 0; i < prodArr.length; i++) {
+                result.innerHTML += `<div class="card" style="width: 18rem;">
+                <img src="${prodArr[i].productImage}" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">${prodArr[i].productName}</h5>
+                <p class="card-text">${prodArr[i].productDescription}</p>
+                
+
+                <div class='d-flex gap-4'><button class='btn btn-danger' onclick= 'deleteItem(${i})'>Delete</button><button class='btn btn-success' onclick= 'editItem(${i})'>Edit item</button></div>
+
+                </div>
+                        </div>`;
+            }
+        }
+
+        function deleteLastProd() {
+            prodArr.pop()
+            console.log(prodArr)
+            displayProd()
+        }
+
+
+        function addAsFirst() {
+            prodArr.unshift(prodName.value)
+            console.log(prodArr)
+            displayProd()
+        }
+
+        function deleteFirst() {
+            prodArr.shift(prodName.value)
+            console.log(prodArr)
+            displayProd()
+        }
+
+        function reverseSelection() {
+            prodArr.reverse(prodName.value)
+            console.log(prodArr)
+            displayProd()
+        }
+
+
+        function deleteItem(some) {
+            let isdelete = confirm('Are you sure you want to delete this item')
+            if (isdelete) {
+                console.log(some)
+                prodArr.splice(some, 1)
+                displayProd()
+            }
+        }
+
+        function editItem(edit) {
+            let newItem = prompt(`Edit the item? name:${prodArr[edit].productName}`, prodArr[edit].productName);
+            let desc = prompt(`Edit the item desscription? Desc:${prodArr[edit].productDescription, prodArr[edit].productDescription}`);
+            let img = prompt(`Edit the image? Desc:${prodArr[edit].productImage, prodArr[edit].productImage}`);
+
+
+
+            if (newItem, desc, img) {
+            prodArr.splice(edit, 1, { productName: newItem, productDescription: desc, productImage: img });
+                
+            displayProd();
+            }
+            
+
+        }
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
+

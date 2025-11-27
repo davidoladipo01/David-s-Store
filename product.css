@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+        .store-header {
+            background: #f7a325;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        
+        #result {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        
+        .card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 18rem;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+        }
+
+        .card-img-top {
+            height: 180px;
+            object-fit: cover;
+        }
